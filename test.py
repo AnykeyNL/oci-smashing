@@ -1,11 +1,15 @@
 import oci
 from urllib import request, parse
 import json
+import smashing
+import ocifunctions
+import time
 
-configfile = "c:\\oci\\config_ctd"
+FR = "eu-frankfurt-1"
+UK = "uk-london-1"
+
+configfile = "~/.oci/config"
 config = oci.config.from_file(configfile)
-
-authtoken = "jhalkfdsjjhsajkdfhskjdhfsakljhfsjhalskjfhderewre"
 
 identity = oci.identity.IdentityClient(config)
 user = identity.get_user(config["user"]).data
@@ -13,24 +17,51 @@ RootCompartmentID = user.compartment_id
 print("RootID: {} ".format(RootCompartmentID))
 print("Logged in as: {} @ {}".format(user.description, config["region"]))
 
-workshopgroup = "f34052c061a94574908d1947a48999ce"
-admingroup = "ocid1.group.oc1..aaaaaaaa63j5kkufv4mggyhawooi4pdwbpsi77kngzth7h2ffqyjh27zxzeq"
+while True:
 
-id_provider = "ocid1.saml2idp.oc1..aaaaaaaaypucmhaxy5s7j6wu7rff2wj7y46zlglklwaahtnsmmfkqgdfltpq"
+    users = ocifunctions.Totalusers(RootCompartmentID)
+    smashing.UpdateMeter("oci_users", users)
 
-users = oci.pagination.list_call_get_all_results(identity.list_users, compartment_id=RootCompartmentID, identity_provider_id=id_provider).data
+    compartments = ocifunctions.TotalCompartments(RootCompartmentID)
+    smashing.UpdateMeter("oci_compartments", len(compartments))
 
-usercount = 0
-for user in users:
-    name = user.name
-    if name.find("@oracle.com") == -1:
-        usercount = usercount + 1
+    VCNs= ocifunctions.TotalVCNs(RootCompartmentID, compartments, FR)
+    smashing.UpdateMeter("oci_vcns_fr", VCNs)
 
-print ("Users: {}".format(usercount))
+    VCNs = ocifunctions.TotalVCNs(RootCompartmentID, compartments, UK)
+    smashing.UpdateMeter("oci_vcns_uk", VCNs)
 
-data = {"auth_token": authtoken, "value": usercount}
-data = json.dumps(data)
-data = str(data)
-data = data.encode('utf-8')
-req =  request.Request("http://www.oci-workshop.com:3030/widgets/oci_users", data=data)
-resp = request.urlopen(req)
+    VMs = ocifunctions.TotalVMs(RootCompartmentID, compartments, FR, "VM.Standard2.1")
+    smashing.UpdateMeter("oci_instance_fr_1", VMs)
+
+    VMs = ocifunctions.TotalVMs(RootCompartmentID, compartments, UK, "VM.Standard2.1")
+    smashing.UpdateMeter("oci_instance_uk_1", VMs)
+
+    VMs = ocifunctions.TotalVMs(RootCompartmentID, compartments, FR, "VM.Standard2.2")
+    smashing.UpdateMeter("oci_instances_fr_2", VMs)
+
+    VMs = ocifunctions.TotalVMs(RootCompartmentID, compartments, UK, "VM.Standard2.2")
+    smashing.UpdateMeter("oci_instances_uk_2", VMs)
+
+    LB = ocifunctions.TotalLB(RootCompartmentID, compartments, FR)
+    smashing.UpdateMeter("oci_lb_fr", LB)
+
+    LB = ocifunctions.TotalLB(RootCompartmentID, compartments, UK)
+    smashing.UpdateMeter("oci_lb_uk", LB)
+
+    WAF = ocifunctions.TotalWaf(RootCompartmentID, compartments, FR)
+    smashing.UpdateMeter("oci_waf_fr", WAF)
+
+    WAF = ocifunctions.TotalWaf(RootCompartmentID, compartments, UK)
+    smashing.UpdateMeter("oci_waf_uk", WAF)
+
+    IMG = ocifunctions.TotalImagess(RootCompartmentID, compartments, FR)
+    smashing.UpdateMeter("oci_customimg_fr", IMG)
+
+    IMG = ocifunctions.TotalImagess(RootCompartmentID, compartments, UK)
+    smashing.UpdateMeter("oci_customimg_uk", IMG)
+
+    print ("update cycle done")
+    time.sleep(10)
+
+
