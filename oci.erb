@@ -1,0 +1,90 @@
+<script type='text/javascript'>
+	$(function() {
+	Dashing.widget_base_dimensions = [308, 347] 
+	Dashing.numColumns = 6
+
+ Dashing.gridsterLayout('[{"col":2,"row":1,"size_x":2,"size_y":1},{"col":1,"row":1,"size_x":1,"size_y":1},{"col":6,"row":1,"size_x":1,"size_y":1},{"col":4,"row":1,"size_x":1,"size_y":1},{"col":5,"row":1,"size_x":1,"size_y":1},{"col":1,"row":2,"size_x":1,"size_y":1},{"col":1,"row":3,"size_x":1,"size_y":1},{"col":2,"row":2,"size_x":1,"size_y":1},{"col":2,"row":3,"size_x":1,"size_y":1},{"col":3,"row":2,"size_x":1,"size_y":1},{"col":3,"row":3,"size_x":1,"size_y":1},{"col":4,"row":2,"size_x":1,"size_y":1},{"col":4,"row":3,"size_x":1,"size_y":1},{"col":6,"row":2,"size_x":1,"size_y":1},{"col":6,"row":3,"size_x":1,"size_y":1},{"col":5,"row":2,"size_x":1,"size_y":1},{"col":5,"row":3,"size_x":1,"size_y":1}]')
+
+ });
+ </script>
+
+<% content_for :title do %>OCI Workshop Dashboard<% end %>
+
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-view="Clock" style="background-color:#404040;"></div>
+      <i class="fa fa-clock-o icon-background"></i>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+	    <div data-view="Image" data-image="/oci.png" style="background-color:#FFFFFF;"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_tenant" data-view="Text" data-title="Tenant Name" data-text="ORACTDEMEAOCI" data-moreinfo="Rome Workshop"  style="background-color:#E15C19;"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_users" data-view="Meter" data-moreinfo="OCI Activated Accounts" data-title="Accounts" data-min="0" data-max="60"  style="background-color:#aa0000;"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_compartments" data-view="Meter" data-moreinfo="Created compartments" data-title="Compartments" data-min="0" data-max="60"  style="background-color:#aa0000;" ></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_vcns_fr" data-view="Meter" data-moreinfo="Created VCNs @ Frankfurt" data-title="EU VCNs" data-min="0" data-max="50" style="background-color:#3399ff;"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_vcns_uk" data-view="Meter" data-moreinfo="Created VCNs @ London" data-title="UK VCNs" data-min="0" data-max="50" style="background-color:#0000aa;"></div>
+    </li>
+
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_instance_fr_1" data-view="Meter" data-moreinfo="Created Instances vm2.1 @ Frankfurt" data-title="EU Instances VM2.1" data-min="0" data-max="240" style="background-color:#3399ff;">></div>
+    </li>
+
+     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_instance_uk_1" data-view="Meter" data-moreinfo="Created Instances vm2.1 @ London" data-title="UK Instances VM2.1" data-min="0" data-max="240" style="background-color:#0000aa;"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_lb_fr" data-view="Meter" data-moreinfo="Created Load Balancers @ Frankfurt" data-title="EU Load Balancers" data-min="0" data-max="30" style="background-color:#3399ff;">></div>
+    </li>
+
+     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_lb_uk" data-view="Meter" data-moreinfo="Created Load Balancers @ London" data-title="UK Load Balancers" data-min="0" data-max="30" style="background-color:#0000aa;"></div>
+    </li>
+
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_waf_fr" data-view="Meter" data-moreinfo="Created WAF Policies @ Frankfurt" data-title="EU WAF Policies" data-min="0" data-max="30"  style="background-color:#3399ff;">></div>
+    </li>
+
+     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_waf_uk" data-view="Meter" data-moreinfo="Created WAF Policies @ London" data-title="UK WAF Policies" data-min="0" data-max="30" style="background-color:#0000aa;"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_instances_fr_2" data-view="Meter" data-moreinfo="Created Instances vm2.2 @ Frankfurt" data-title="EU Instances VM2.2" data-min="0" data-max="30"  style="background-color:#3399ff;">></div>
+    </li>
+
+     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_instances_uk_2" data-view="Meter" data-moreinfo="Created Instances vm2.2 @ London" data-title="UK Instances VM2.2" data-min="0" data-max="30" style="background-color:#0000aa;"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_customimg_fr" data-view="Meter" data-moreinfo="Custom Images @ Frankfurt" data-title="EU Imported VMs" data-min="0" data-max="30" style="background-color:#3399ff;">></div>
+    </li>
+
+     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="oci_customimg_uk" data-view="Meter" data-moreinfo="Custom Images @ London" data-title="UK Imported VMs" data-min="0" data-max="30" style="background-color:#0000aa;"></div>
+    </li>
+
+
+
+
+  </ul>
+</div>
