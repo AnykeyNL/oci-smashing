@@ -1,8 +1,8 @@
 from urllib import request, parse
 import json
 
-authtoken = "jhalkfdsjjhsajkdfhskjdhfsakljhfsjhalskjfhderewre"
-url = "http://www.oci-workshop.com:3030"
+authtoken = "[your_key_here]"
+url = "http://[your smashinh url:port here]"
 
 def UpdateMeter(widget, value):
     data = {"auth_token": authtoken, "value": value}
