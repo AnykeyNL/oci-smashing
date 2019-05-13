@@ -12,7 +12,7 @@ def Totalusers(RootCompartmentID):
 
 def TotalCompartments(RootCompartmentID):
     identity = oci.identity.IdentityClient(config)
-    c = oci.pagination.list_call_get_all_results(identity.list_compartments, compartment_id=RootCompartmentID).data
+    c = oci.pagination.list_call_get_all_results(identity.list_compartments, compartment_id=RootCompartmentID, compartment_id_in_subtree=True).data
     compartments = []
     for comp in c:
         if comp.lifecycle_state == "ACTIVE":
